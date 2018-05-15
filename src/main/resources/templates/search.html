@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<title>Trang tìm kiếm</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<style>
+body {
+	background: #91e4fb;
+}
+
+input:focus, input:hover, input:active {
+	border: none;
+}
+
+a:hover {
+	color: #fb0b23 !important;
+}
+
+.header {
+	margin-top: 20px;
+	margin-bottom: 30px;
+}
+
+.link-item {
+	background: #fff;
+	border: 1px solid #000;
+	color: #000;
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+}
+
+.search {
+	border: 1px solid #000;
+	border-radius: 10px;
+	margin: 10px;
+	width: 90%;
+	position: relative;
+	padding: 3px 5px 3px 30px;
+	background: #fff;
+}
+
+.btn-search {
+	color: #000;
+	background-color: #e6e6e6;
+	border: 1px solid #080808;
+	border-radius: 5px;
+}
+
+.icon {
+	position: absolute;
+	left: 10px;
+	top: 5px;
+}
+
+.select {
+	width: 90%;
+	margin: 10px;
+	padding: 5px;
+	background: #fff;
+	border: 1px solid #000;
+	border-radius: 5px;
+}
+
+table {
+	background: #fff;
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+td, th {
+	text-align: center;
+	border: 1px solid #dddddd;
+	padding: 8px;
+}
+
+tr:nth-child(even) {
+	background-color: #dddddd;
+}
+
+.navbar-form {
+	padding: 0px;
+}
+
+.navbar-form .form-control {
+	background: white url(../img/search-line-icon.png) no-repeat 10px;
+	border: 1px solid #000;
+	border-radius: 30px;
+	width: 100%;
+	position: relative;
+	padding: 3px 5px 3px 30px;
+}
+</style>
+</head>
+<body>
+	<div class="container">
+		<div class="header">
+			<nav class="navbar">
+				<div class="container-fluid">
+					<ul class="nav navbar-nav" style="width: 100%;">
+						<li style="width: 10%"><a
+							style="text-align: center; padding-top: 3px; padding-bottom: 3px;"
+							class="link-item" href="/">Trang chủ</a></li>
+						<li 
+							style="width: 10%" class="dropdown active"><a
+							style="text-align: center; padding-top: 3px; padding-bottom: 3px;    background: #e6e6e6;color: red;"
+							class="link-item dropdown-toggle" data-toggle="dropdown" href="#">Người
+								dùng</a>
+							<ul sec:authorize="hasAnyRole('ROLE_ADMIN')" class="dropdown-menu" style="width: 100%;">
+								<li><a href="/admin/danh-sach-nguoi-dung">Danh sách</a></li>
+								<li><a href="/admin/them-nguoi-dung">Thêm</a></li>
+							</ul></li>
+						<li style="width: 20%"><a
+							style="text-align: center; padding-top: 3px; padding-bottom: 3px;"
+							class="link-item" href="#">Đơn vị nhận máu</a></li>
+						<li style="width: 25%"><a
+							style="text-align: center; padding-top: 3px; padding-bottom: 3px;"
+							class="link-item" href="#">Danh sách các đợt hiến máu</a></li>
+						<li style="width: 25%"><a
+							style="text-align: center; padding-top: 3px; padding-bottom: 3px;"
+							class="link-item" href="#">Danh sách người hiến máu</a></li>
+						<li style="width: 10%"><a
+							style="text-align: center; padding-top: 3px; padding-bottom: 3px;"
+							class="link-item" href="/logout">Đăng xuất</a></li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+
+		<div class="content">
+			<h2 style="font-weight: 800;">Danh sách người dùng</h2>
+			<form class="navbar-form" method="get" action="/admin/search">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="nav search-row" id="top_menu">
+						<ul class="nav top-menu">
+							<li>
+									<input th:value="${keyword}" name="keyword"  required="required" class="form-control" placeholder="Tìm kiếm" type="text">
+								
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<select class="select" name="typeSearch">
+						<option value="1" th:selected="${typeSearch == 1}">Theo tên</option>
+						<option value="2" th:selected="${typeSearch == 2}">Theo địa chỉ</option>
+						<option value="3" th:selected="${typeSearch == 3}">Theo SĐT</option>
+					</select>
+
+				</div>
+				<div class="col-md-3">
+					<input style="padding: 3px 30px; margin: 10px;" type="submit"
+						class="btn-search" value="Tìm">
+				</div>
+			</div>
+			</form>
+			<hr style="border-top: 2px solid #000;">
+			<h2 th:text="'Có '+${size}+' kết quả tìm kiếm'"></h2>
+			<table th:if="${size > 0}">
+				<tr style="background: #ccc;">
+					<th><span class="caret"></span>Mã ID</th>
+					<th><span class="caret"></span>Tên</th>
+					<th><span class=""></span>Ngày sinh</th>
+					<th><span class=""></span>Địa chỉ</th>
+					<th><span class=""></span>Số điện thoại</th>
+					<th><span class=""></span>Quyền</th>
+					<th><span class=""></span>Xem chi tiết</th>
+				</tr>
+				<tr th:each="objDetailUser : ${listUser}">
+					<td style="text-align: left;" th:text="${objDetailUser.idUser}"></td>
+					<td style="text-align: left;" th:text="${objDetailUser.fullname}"></td>
+					<td style="text-align: left;" th:text="${objDetailUser.birthday}"></td>
+					<td style="text-align: left;" th:text="${objDetailUser.address}"></td>
+					<td style="text-align: left;" th:text="${objDetailUser.phone}"></td>
+					<td style="text-align: left;" th:text="${objDetailUser.user.idRole}==1?admin:user"> 
+                    </td> 
+					<td><a th:href="'/admin/chi-tiet-nguoi-dung/'+${objDetailUser.idUser}">Xem..</a></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,291 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<title>Thêm người dùng</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<meta charset="utf-8">
+<style type="text/css">
+body {
+	background: #91e4fb;
+}
+
+a:hover {
+	color: #fb0b23 !important;
+}
+
+.header {
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+
+.link-item {
+	background: #fff;
+	border: 1px solid #000;
+	color: #000;
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+}
+
+.select {
+	width: 90%;
+	margin: 10px;
+	padding: 5px;
+	background: #fff;
+	border: 1px solid #000;
+	border-radius: 5px;
+}
+
+.navbar-form {
+	padding: 0px;
+}
+
+.navbar-form .form-control {
+	background: white url(/img/search-line-icon.png) no-repeat 10px;
+	border: 1px solid #000;
+	border-radius: 30px;
+	width: 100%;
+	position: relative;
+	padding: 3px 5px 3px 30px;
+}
+
+.clr {
+	clear: both;
+}
+
+.form-input {
+	margin: 0px 60px 10px 50px;
+	width: 500px;
+	height: 30px;
+	float: right;
+	border: 1px solid #000;
+	font-size: medium;
+	padding-left: 5px
+}
+.error{
+ 	margin-left: 50px;
+    font-size: 15px;
+    color: red;
+}
+</style>
+</head>
+<body>
+	<div class="container">
+		<div class="header">
+			<nav class="navbar">
+				<div class="container-fluid">
+					<ul class="nav navbar-nav" style="width: 100%;">
+						<li style="width: 10%"><a
+							style="text-align: center; padding-top: 3px; padding-bottom: 3px;"
+							class="link-item" href="/">Trang chủ</a></li>
+						<li  style="width: 10%"
+							class="dropdown active">
+							<a
+							style="text-align: center; padding-top: 3px; padding-bottom: 3px; background: #e6e6e6; color: red;"
+							class="link-item dropdown-toggle" data-toggle="dropdown" href="#">Người
+								dùng</a>
+							<ul sec:authorize="hasAnyRole('ROLE_ADMIN')" class="dropdown-menu" style="width: 100%;">
+								<li><a href="/admin/danh-sach-nguoi-dung">Danh sách</a></li>
+								<li><a href="/admin/them-nguoi-dung">Thêm</a></li>
+							</ul></li>
+						<li style="width: 20%"><a
+							style="text-align: center; padding-top: 3px; padding-bottom: 3px;"
+							class="link-item" href="#">Đơn vị nhận máu</a></li>
+						<li style="width: 25%"><a
+							style="text-align: center; padding-top: 3px; padding-bottom: 3px;"
+							class="link-item" href="#">Danh sách các đợt hiến máu</a></li>
+						<li style="width: 25%"><a
+							style="text-align: center; padding-top: 3px; padding-bottom: 3px;"
+							class="link-item" href="#">Danh sách người hiến máu</a></li>
+						<li style="width: 10%"><a
+							style="text-align: center; padding-top: 3px; padding-bottom: 3px;"
+							class="link-item" href="/logout">Đăng xuất</a></li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+	</div>
+	<div
+		style="margin: 10px 200px auto 200px; padding: 30px; border: 1px solid #000; background: #c9f1fd; font-size: 24px; border-radius: 50px;">
+		<div>
+
+			<h3
+				style="text-align: center; font-size: 35px; font-family: sans-serif; margin-top: 0px; margin-bottom: 20px; font-weight: 800">
+				THÊM NGƯỜI DÙNG</h3>
+			<form name="formAddUser" style="font-size: 20px" id="formAddUser">
+				<div style="margin-left: 10px; position: relative;">
+				<table>
+					<tr>
+						<th>
+							<span>Tên đăng nhập</span> 
+						</th>
+						<td>
+							<input class="form-input" type="text"
+							placeholder="Tên đăng nhập" name="username" id="username">
+						</td>
+					</tr>
+					<tr>
+						<th></th>
+						<td>
+							<label for="username" class="error"></label>
+						</td>
+					</tr>
+					<tr>
+						<th>
+							<span>Mật khẩu</span> 
+						</th>
+						<td>
+							<input class="form-input" type="password"
+							placeholder="Mật khẩu" name="password" id="password">
+						</td>
+					</tr>
+					<tr>
+						<th></th>
+						<td>
+							<label for="password" class="error"></label>
+						</td>
+					</tr>
+					<tr>
+						<th>
+							<span>Xác nhận mật khẩu</span>
+						</th>
+						<td>
+							<input class="form-input"
+							type="password" placeholder="Xác nhận mật khẩu" name="repassword"
+							id="repassword">
+						</td>
+					</tr>
+					<tr>
+						<th></th>
+						<td>
+							<label for="repassword" class="error"></label>
+						</td>
+					</tr>
+					<tr>
+						<th>
+							<span>Họ tên</span>
+						</th>
+						<td>
+							<input class="form-input" type="text"
+							placeholder="Họ tên" name="fullname" id="fullname">
+						</td>
+					</tr>
+					<tr>
+						<th></th>
+						<td>
+							<label for="fullname" class="error"></label>
+						</td>
+					</tr>
+					<tr>
+						<th>
+							<span>Ngày sinh</span> 
+						</th>
+						<td>
+							<input class="form-input" type="date"
+							placeholder="Ngày sinh" name="birthday" id="birthday">
+						</td>
+					</tr>
+					<tr>
+						<th></th>
+						<td>
+							<label for="birthday" class="error"></label>
+						</td>
+					</tr>
+					<tr>
+						<th>
+							<span style="float: left;">Giới tính</span>
+						</th>
+						<td style="float: left; margin-left: 176px; margin-bottom: 20px">
+							<input type="radio" name="sex" th:value="0" checked>Nữ
+							<input	style="margin-left: 50px" type="radio" name="sex" th:value="1">Nam
+						</td>
+					</tr>
+					<tr>
+						<th></th>
+						<td>
+							<label for="sex" class="error"></label>
+						</td>
+					</tr>
+					<tr>
+						<th>
+							<span>Số điện thoại</span> 
+						</th>
+						<td>
+							<input class="form-input" type="text"
+							placeholder="Số điện thoại" name="phone" id="phone">
+						</td>
+					</tr>
+					<tr>
+						<th></th>
+						<td>
+							<label for="phone" class="error"></label>
+						</td>
+					</tr>
+					<tr>
+						<th>
+							<span>Địa chỉ</span> 
+						</th>
+						<td>
+							<input class="form-input" type="text"
+							placeholder="Địa chỉ" name="address" id="address">
+						</td>
+					</tr>
+					<tr>
+						<th></th>
+						<td>
+							<label for="address" class="error"></label>
+						</td>
+					</tr>
+					<tr>
+						<th>
+							<span>Email</span> 
+						</th>
+						<td>
+							<input class="form-input" type="email"
+							placeholder="email" name="email" id="email">
+						</td>
+					</tr>
+					<tr>
+						<th></th>
+						<td>
+							<label for="email" class="error"></label>
+						</td>
+					</tr>
+					<tr>
+						<th>
+							<span>Quyền</span> 
+						</th>
+						<td>
+							<select class="form-input"
+							style="background: #fff" name="idRole" id="idRole">
+							<option value="1">admin</option>
+							<option value="2" selected>user</option>
+						</select>
+						</td>
+					</tr>
+					
+				</table>
+					<div align="center">
+						<div style="margin-top: 10px;">
+							<input
+								style="padding: 0 50px; margin: 5px; border: 1px solid #000; border-radius: 100px;"
+								type="submit" value="Thêm"> <input
+								style="padding: 0 50px; margin: 5px; border: 1px solid #000; border-radius: 100px;"
+								type="reset" value="Hủy">
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<script type="text/javascript" src="/js/jquery.js"></script>
+	<script type="text/javascript" src="/js/jquery.validate.min.js"></script>
+	<!-- <script type="text/javascript" src="/js/scripts.js"></script> -->
+	<script type="text/javascript" src="/js/validate.js"></script>
+	<script type="text/javascript" src="/js/user.js"></script>
+</body>
+</html>

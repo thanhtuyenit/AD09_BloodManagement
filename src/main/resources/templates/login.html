@@ -1,0 +1,32 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Đăng nhập</title>
+    <meta charset="utf-8">
+</head>
+<body style="background: #91e4fb">
+
+<h1 style="text-align: center;margin: 40px auto;font-size: 45px;font-family:  sans-serif;">HỆ THỐNG QUẢN LÝ HIẾN MÁU NHÂN ĐẠO TP. ĐÀ NẴNG</h1>
+<div class="login-form" style="margin: 50px auto;width: 801px;height:  401px;padding: 30px;border: 1px solid #000;background: #c9f1fd;font-size: 24px;border-radius: 50px;">
+    <h3 style="text-align: center;font-size: 35px;font-family:  sans-serif;margin-top: 0px;margin-bottom: 80px;"> Đăng nhập </h3>
+    <h5  th:if="${msg != null}" th:text="${msg}" style="color: red; text-align: center;margin-top: -50px;">...</h5>
+    <form name="loginForm" action="/login" method="post" id="formLogin">
+        <div style="margin-left: 100px;  position: relative;">
+            <div style="margin: 30px 0; ">
+                <span>Tên đăng nhập: </span>
+                <input style="padding: 5px; position: absolute; left: 180px;" type="text" name="username" size="40" id="username">
+            </div>
+            <div style="margin: 38px 0;position: relative;">
+                <span>Mật khẩu: </span>
+                <input style="padding: 5px;  position: absolute; left: 180px;" type="password" name="password" size="40" id="password">
+            </div>
+            <div align="center" style="margin: 30px 0; ">
+                <div style="margin-top: 60px;">
+                    <input style="padding: 5px 25px 5px 25px;margin: 5px;border: 1px solid #000;border-radius: 100px;" type="submit" value="Đăng nhập">
+                    <input style="padding: 5px 50px 5px 50px;margin: 5px;border: 1px solid #000;border-radius: 100px;" type="reset" value="Hủy">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
