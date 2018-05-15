@@ -2,16 +2,18 @@
 ## Đồ án Phân tích và Thiết kế Hệ thống thông tin
 #### Mô tả dự án
 #####Thiết kế phần quản lý hiến máu nhân đạo thành phố Đà Nẵng với các chức năng sau: (Chỉ mô tả những chức năng đã hoàn thành)
+
 - Đối với người đăng nhập vào hệ thống là administrators (gọi tắt là admin)
 
-		+ Có toàn quyền với hệ thống
- 		+ Chỉnh sửa thông tin cá nhân đăng nhập
-  	+ Đổi mật khẩu cá nhân
-  	+ Xem toàn bộ danh sách người sử dụng hệ thống
-  	+ Thêm, sửa, xóa, khóa các người sử dụng của hệ thống (có thể reset lại password cho user khi user quên mật khẩu)
- 		+ Tìm kiếm người sử dụng hệ thống bằng nhiều tiêu chí(Họ tên, địa chỉ, số điện thoại...)
-  	+ Đăng xuất khỏi hệ thống
-  	+ Có 1 tài khoản với username là admin@gmail.com được mặc định là super admin, nghĩa là không có quyền đổi quyền sử dụng, khoá, xóa admin này. Các admin còn lại vẫn có thể bị xóa, khóa, đổi quyền bình thường
+	+ Có toàn quyền với hệ thống
+	+ Chỉnh sửa thông tin cá nhân đăng nhập
+	+ Đổi mật khẩu cá nhân
+	+ Xem toàn bộ danh sách người sử dụng hệ thống
+	+ Thêm, sửa, xóa, khóa các người sử dụng của hệ thống (có thể reset lại password cho user khi user quên mật khẩu)
+	+ Tìm kiếm người sử dụng hệ thống bằng nhiều tiêu chí(Họ tên, địa chỉ, số điện thoại...)
+	+ Đăng xuất khỏi hệ thống
+	+ Có 1 tài khoản với username là admin@gmail.com được mặc định là super admin, nghĩa là không có quyền đổi quyền sử dụng, khoá, xóa admin này. Các admin còn lại vẫn có thể bị xóa, khóa, đổi quyền bình thường
+	
 - Đối với người đăng nhập không phải là administrators (gọi tắt là user)
 
    	+ Tài khoản của user được admin cấp để truy cập vào hệ thống
